@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -21,8 +22,20 @@ export default {
     extend: {
       width: {
         'custom-1': '30rem',
+        'custom-2': '55%',
+        'custom-3': '70%',
+        'custom-4': '45%',
+        'custom-5': '43%',
       },
+      flex: {
+        2: '2 2 0%',
+      },
+      backgroundImage: (theme) => ({
+        laptopsDS: "url('/src/assets/Laptops.png')",
+        laptopsSM: "url('/src/assets/Frame 61.png')",
+        phonesDS: "url('/src/assets/smartPhones.png')",
+      }),
     },
   },
   plugins: [],
-};
+}

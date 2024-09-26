@@ -1,20 +1,19 @@
+import { FaStar } from 'react-icons/fa'
+import { FaRegStar } from 'react-icons/fa'
+
 export function StarRating({ rating }: { rating: number }) {
-  const filledStars = Math.floor(rating);
-  const emptyStars = 5 - filledStars;
+  const filledStars = Math.floor(rating)
+  const emptyStars = 5 - filledStars
 
   return (
-    <div className="flex items-center">
+    <div className="flex flex-nowrap items-center">
       {Array.from({ length: filledStars }, (_, index) => (
-        <span key={index} className="text-yellow-500 text-xl">
-          &#9733;
-        </span>
+        <FaStar key={index} className="text-xl text-yellow-500" />
       ))}
       {Array.from({ length: emptyStars }, (_, index) => (
-        <span key={index} className="text-yellow-500 text-xl">
-          &#9734;
-        </span>
+        <FaRegStar key={index} className="text-xl text-yellow-500" />
       ))}
-      <h3 className="ml-2">{rating}</h3>
+      <h3 className="ml-2 font-semibold">{rating}/5</h3>
     </div>
-  );
+  )
 }
