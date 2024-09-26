@@ -27,7 +27,7 @@ Check out the live version of the project here: [Shop Co](https://shopco.vercel.
 
 Add screenshots to showcase the interface and functionality of your project. For now, here are some placeholders:
 
-![Homepage](public/homepage.png)
+![Homepage](public/Homepage.png)
 ![Product Page](public/product-page.png)
 
 ## Installation
