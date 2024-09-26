@@ -21,7 +21,7 @@ An e-commerce platform for electronic products such as laptops, mobile phones, a
 
 ## Demo
 
-Check out the live version of the project here: [Shop Co](https://shopco.vercel.app/).
+Check out the live version of the project here: [Shop Co](https://shop-co-app.vercel.app/).
 
 ## Screenshots
 
