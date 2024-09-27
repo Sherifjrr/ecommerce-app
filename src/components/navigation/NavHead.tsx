@@ -1,5 +1,5 @@
-import NavLink from './NavLink'
 import { MdOutlineCancel } from 'react-icons/md'
+import NavLink from './NavLink'
 
 interface NavHeadProps {
   setToggleNav: React.Dispatch<React.SetStateAction<boolean>>

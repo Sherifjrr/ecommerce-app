@@ -1,9 +1,11 @@
-import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
-import { CiSquareChevUp } from 'react-icons/ci'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+
 import { RootState, setPriceFilter } from '../../state/filterSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+
+import { CiSquareChevUp } from 'react-icons/ci'
+import Slider from 'rc-slider'
 
 function FilterBar() {
   const [value, setValue] = useState<[number, number]>([0, 2000])
@@ -26,7 +28,7 @@ function FilterBar() {
 
   return (
     <div
-      className={`lg: fixed -bottom-60 left-0 z-50 mx-14 my-6 w-3/4 rounded-3xl border-2 border-gray-200 bg-white p-5 md:ml-24 lg:z-0 lg:mx-4 ${isFilterOpen ? `-bottom-0` : `-bottom-60`} h-fit lg:static lg:w-1/4 xl:mx-12 xl:w-1/6`}
+      className={`fixed -bottom-60 left-0 z-50 mx-14 my-6 w-3/4 rounded-3xl border-2 border-gray-200 bg-white p-5 md:ml-24 lg:z-0 lg:mx-4 ${isFilterOpen ? `bottom-0` : `-bottom-60`} h-fit lg:static lg:w-1/4 xl:mx-12 xl:w-1/6`}
     >
       <div className="flex justify-between border-b-2 border-gray-200 pb-4 text-xl font-bold">
         <h3>Filters</h3>
