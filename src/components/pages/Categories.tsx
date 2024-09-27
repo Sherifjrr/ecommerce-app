@@ -9,7 +9,7 @@ function Categories() {
     <section className="flex justify-center">
       <div className="mx-5 my-10 mb-36 h-full w-96 rounded-3xl bg-gray-100 p-5 md:mb-28 md:w-fit lg:mx-10 lg:w-5/6 lg:px-10">
         <h1 className="m-10 text-center text-4xl font-extrabold lg:mt-16">
-          BROWSE BY CATEGORIES
+          BROWSE BY CATEGORIES 'test'
         </h1>
         <div className="flex w-full flex-wrap justify-around">
           <div className="mt-5 flex w-full justify-center rounded-3xl xl:w-5/12">
