@@ -12,22 +12,59 @@ import BreadcrumbNav from '../elements/BreadcrumbNav'
 import { FaArrowRight } from 'react-icons/fa'
 import Footer from './Footer'
 import NavBar from '../navigation/NavBar'
+import { RootState } from '../../state/store'
 import { productPropsTypes } from '../../state/Types'
+import { toast } from 'react-toastify'
+
+const promptToLogin = () => {
+  toast.info(' Please log in to add items to your cart! 🛒', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  })
+}
+
+const notifyCart = (massage: string) => {
+  toast.success(massage),
+    {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    }
+}
 
 function Cart() {
   const cartProducts = useSelector(
     (state: cartReducer) => state.cartReducer.cart
   )
+  const isLogged = useSelector(
+    (state: RootState) => state.authReducer.accessToken
+  )
   const dispatch = useDispatch()
 
   const cartAddition = (product: productPropsTypes['product']) => {
-    dispatch(addToCart(product))
+    if (!isLogged) {
+      promptToLogin()
+    } else {
+      dispatch(addToCart(product))
+      notifyCart('Added Successfully')
+    }
   }
   const cartRemoval = (product: productPropsTypes['product']) => {
     dispatch(removeFromCart(product))
+    notifyCart('Removed Successfully')
   }
   const cartRemovalAll = (product: productPropsTypes['product']) => {
     dispatch(removeAllProduct(product))
+    notifyCart('All Removed Successfully')
   }
   const countedTotal =
     cartProducts.reduce(
@@ -63,7 +100,7 @@ function Cart() {
                       alt={product.title}
                       className="m-2 h-36 w-36 cursor-pointer rounded-2xl bg-gray-100 md:h-40 md:w-40"
                     />
-                    <div className="flex w-full justify-between">
+                    <div className="flex w-full flex-wrap justify-center lg:justify-between">
                       <div className="p-2 md:p-4">
                         <h2 className="font-bold md:text-lg">
                           {product.title}
@@ -73,7 +110,7 @@ function Cart() {
                           ${product.price}
                         </h2>
                       </div>
-                      <div className="flex flex-col items-end justify-between p-2">
+                      <div className="flex w-full items-center justify-between p-2 md:w-fit md:flex-col md:items-end">
                         <button
                           onClick={() => cartRemovalAll(product)}
                           title="Remove"
@@ -131,26 +168,26 @@ function Cart() {
                 <div className="flex h-fit flex-col items-center md:px-3 lg:px-0">
                   <form
                     action=""
-                    className="flex w-full justify-between xl:justify-evenly"
+                    className="flex w-full flex-wrap justify-center gap-y-4 xl:justify-evenly"
                   >
                     <div>
-                      <RiCoupon4Line className="absolute ms-4 mt-3.5 text-2xl text-gray-400" />
+                      <RiCoupon4Line className="absolute ms-3 mt-3.5 text-2xl text-gray-400 lg:ms-5" />
                       <input
                         type="text"
                         placeholder="Add Promo Code"
-                        className="block rounded-3xl bg-gray-200 p-2.5 px-6 py-3 ps-10 lg:ms-1.5 lg:px-9"
+                        className="block rounded-3xl bg-gray-200 p-2.5 px-20 py-3 ps-10 lg:ms-1.5 lg:px-12"
                       />
                     </div>
                     <button
                       type="submit"
                       onClick={(e) => e.preventDefault()}
-                      className="rounded-3xl bg-black px-8 py-3 text-white lg:px-6"
+                      className="rounded-3xl bg-black px-10 py-3 text-white lg:px-6"
                     >
                       {' '}
                       Apply
                     </button>
                   </form>
-                  <button className="mt-4 flex items-center rounded-3xl bg-black px-28 py-3.5 text-white md:px-36 lg:px-28">
+                  <button className="mt-4 flex items-center rounded-3xl bg-black px-20 py-3.5 text-white md:px-36 lg:px-28">
                     Go to Checkout <FaArrowRight className="ml-2" />
                   </button>
                 </div>

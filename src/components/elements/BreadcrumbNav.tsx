@@ -1,11 +1,10 @@
 import { Link, useLocation } from 'react-router-dom'
+
 import { IoIosArrowForward } from 'react-icons/io'
 
 function BreadcrumbNav() {
   const location = useLocation()
   const pathLocation = location.pathname.split('/').filter((x) => x)
-
-  console.log(pathLocation)
   return (
     <nav aria-label="BreadCrumb Navigation">
       <ol className="mt-6 flex items-center pl-6 text-lg font-semibold md:pl-12 xl:pl-20">

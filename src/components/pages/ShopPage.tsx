@@ -55,7 +55,6 @@ function ShopPage() {
     (product) =>
       product.price >= priceFilter[0] && product.price <= priceFilter[1]
   )
-  console.log(filteredProducts)
 
   useEffect(() => {
     if (allData) {
@@ -92,13 +91,13 @@ function ShopPage() {
               ))}
         </section>
       </div>
-      <div className="flex justify-center gap-x-2">
+      <div className="flex flex-wrap justify-center gap-x-2 py-4">
         {filteredProducts.length > 0 &&
           Array(totalPages)
             .fill(0)
             .map((_, index) => (
               <button
-                className="my-5 rounded-xl bg-black px-5 py-2 text-white"
+                className="my-2 rounded-xl bg-black px-5 py-2 text-white"
                 key={index}
                 onClick={() => setCurrentPage(index + 1)}
               >

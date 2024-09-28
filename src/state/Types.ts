@@ -43,6 +43,7 @@ export interface AuthState {
 
 export interface ModalState {
   isOpen: boolean
+  isMenuOpen: boolean
 }
 
 export interface SwiperProps {
