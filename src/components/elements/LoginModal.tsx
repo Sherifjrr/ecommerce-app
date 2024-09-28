@@ -1,9 +1,10 @@
-import { FormEvent, useState, useRef } from 'react'
+import { FormEvent, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLogin, useLogout } from '../../authentication/useLogin'
+
+import { BsCopy } from 'react-icons/bs'
 import { RootState } from '../../state/store'
 import { closeModal } from '../../state/modalSlice'
-import { BsCopy } from 'react-icons/bs'
 import { toast } from 'react-toastify'
 
 const notifyLog = (status: string) => {
@@ -65,7 +66,7 @@ function LoginModal() {
           {userData ? (
             <div
               ref={modalRef}
-              className="relative flex w-5/6 flex-col items-center gap-y-4 rounded-3xl bg-white p-8 shadow-lg lg:w-1/2"
+              className="relative flex w-11/12 flex-col items-center gap-y-4 rounded-3xl bg-white px-4 py-8 shadow-lg lg:w-1/2 lg:p-8"
             >
               <div className="flex items-center justify-between">
                 <h1 className="text-3xl font-bold">
@@ -90,7 +91,7 @@ function LoginModal() {
           ) : (
             <div
               ref={modalRef}
-              className="relative flex w-5/6 flex-col items-center rounded-3xl bg-white p-8 shadow-lg lg:w-1/2"
+              className="relative flex w-11/12 flex-col items-center rounded-3xl bg-white px-4 py-8 shadow-lg lg:w-1/2 lg:p-8"
             >
               {error && (
                 <p className="mb-4 rounded-lg bg-red-400 p-2">

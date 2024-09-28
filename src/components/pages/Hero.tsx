@@ -70,7 +70,7 @@ function Hero() {
           </div>
         </div>
       </div>
-      <div className="flex w-full items-center justify-normal lg:w-1/2">
+      <div className="flex w-full items-center justify-normal overflow-hidden lg:w-1/2">
         <Slider slides={slides} />
       </div>
     </section>

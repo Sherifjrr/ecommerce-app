@@ -1,9 +1,10 @@
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { User } from '../state/Types'
 import { AppDispatch, RootState } from '../state/store'
-import { useQuery } from '@tanstack/react-query'
 import { logIn, logOut } from '../state/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { User } from '../state/Types'
+import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
 
 const login = async ({ username, password }: User) => {
   const res = await fetch('https://dummyjson.com/auth/login', {
@@ -74,6 +75,5 @@ export function useLogout() {
   const dispatch = useDispatch<AppDispatch>()
   return () => {
     dispatch(logOut())
-    // localStorage.removeItem('token')
   }
 }

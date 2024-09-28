@@ -7,8 +7,8 @@ import tabletsImg from '../../assets/Frame 107.png'
 function Categories() {
   return (
     <section className="flex justify-center">
-      <div className="mx-10 my-10 mb-36 h-full w-96 rounded-3xl bg-gray-100 px-10 py-5 md:mb-28 md:w-fit lg:w-5/6">
-        <h1 className="mb-10 mt-16 text-center text-4xl font-extrabold">
+      <div className="mx-5 my-10 mb-36 h-full w-96 rounded-3xl bg-gray-100 p-5 md:mb-28 md:w-fit lg:mx-10 lg:w-5/6 lg:px-10">
+        <h1 className="mb-10 mt-5 text-center text-4xl font-extrabold lg:mt-16">
           BROWSE BY CATEGORIES
         </h1>
         <div className="flex w-full flex-wrap justify-around">

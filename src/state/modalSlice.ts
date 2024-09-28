@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
 import { ModalState } from './Types'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState: ModalState = {
   isOpen: false,
+  isMenuOpen: false,
 }
 
 const modalSlice = createSlice({
@@ -15,8 +16,14 @@ const modalSlice = createSlice({
     closeModal: (state) => {
       state.isOpen = false
     },
+    openMenu: (state) => {
+      state.isMenuOpen = true
+    },
+    closeMenu: (state) => {
+      state.isMenuOpen = false
+    },
   },
 })
 
-export const { openModal, closeModal } = modalSlice.actions
+export const { openModal, closeModal, openMenu, closeMenu } = modalSlice.actions
 export const modalReducer = modalSlice.reducer

@@ -15,8 +15,8 @@ import { format } from 'date-fns'
 function Footer() {
   const currentYear = format(new Date(), 'yyyy')
   return (
-    <footer className="mt-32 bg-gray-100 px-10 pb-16 pt-20 lg:px-16 xl:px-28">
-      <div className="relative z-10 -mt-52 flex flex-wrap items-center justify-center rounded-2xl bg-black px-5 py-6 text-white md:-mt-44 md:px-16 md:py-10 xl:justify-between">
+    <footer className="mt-32 bg-gray-100 px-5 pb-16 pt-20 lg:px-16 xl:px-28">
+      <div className="relative z-10 -mt-52 flex flex-wrap items-center justify-center rounded-2xl bg-black p-6 text-white md:-mt-44 md:px-16 md:py-10 xl:justify-between">
         <h1 className="mb-5 w-full text-center text-4xl font-extrabold md:mb-0 xl:w-fit">
           STAY UP TO DATE ABOUT <br /> OUR LATEST OFFERS
         </h1>

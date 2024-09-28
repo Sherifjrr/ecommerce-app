@@ -1,17 +1,19 @@
 import { CartItem, addToCart, removeFromCart } from '../../state/cartSlice'
 import { IoIosRemove, IoMdAdd } from 'react-icons/io'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
 
 import BreadcrumbNav from '../elements/BreadcrumbNav'
 import Footer from './Footer'
 import NavBar from '../navigation/NavBar'
+import ProductPageSkeleton from '../elements/ProductPageSkeleton'
 import { RootState } from '../../state/store'
 import { StarRating } from '../elements/StarRating'
 import Tabs from '../elements/Tabs'
 import { productPropsTypes } from '../../state/Types'
 import { toast } from 'react-toastify'
-import { useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 const promptToLogin = () => {
   toast.info(' Please log in to add items to your cart! 🛒', {
@@ -38,17 +40,41 @@ const notifyCart = (type: string) => {
     }
 }
 
+const getProduct = async (productId: string) => {
+  const response = await fetch(`https://dummyjson.com/products/${productId}`)
+  if (!response.ok) {
+    throw new Error('Network response was not ok')
+  }
+  return response.json()
+}
+
 function ProductPage() {
   const dispatch = useDispatch()
   const location = useLocation()
-  const product = location.state as productPropsTypes['product']
+  const { productId } = useParams<{ productId: string }>()
+  const passedProduct = location.state as productPropsTypes['product'] | null
+  const [product, setProduct] = useState<productPropsTypes['product'] | null>(
+    passedProduct
+  )
   const isLogged = useSelector(
     (state: RootState) => state.authReducer.accessToken
   )
-  const productState = useSelector<RootState, CartItem[]>(
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['product', productId],
+    queryFn: () => getProduct(productId!),
+    enabled: !product,
+  })
+  useEffect(() => {
+    if (data) {
+      setProduct(data)
+    }
+  }, [data, product])
+
+  const cartItems = useSelector<RootState, CartItem[]>(
     (state) => state.cartReducer.cart
   )
-  const filterProduct = productState.filter((pro) => pro.id === product.id)
+  const cartProduct = cartItems.filter((pro) => pro.id === product?.id)
 
   const cartAddition = (product: productPropsTypes['product']) => {
     if (!isLogged) {
@@ -67,9 +93,19 @@ function ProductPage() {
       notifyCart('Removed')
     }
   }
-  const beforePrice = (product.price * 100) / (100 - product.discountPercentage)
+  const beforePrice = product
+    ? (product.price * 100) / (100 - product.discountPercentage)
+    : 0
 
   const [image, setImage] = useState(0)
+
+  if (isLoading || !product) return <ProductPageSkeleton />
+  if (isError)
+    return (
+      <div className="text-center font-bold text-red-600">
+        Error loading products
+      </div>
+    )
 
   return (
     <>
@@ -134,7 +170,7 @@ function ProductPage() {
                   <IoIosRemove />
                 </button>
                 <h1 className="mx-2 text-xl">
-                  {filterProduct.length > 0 ? filterProduct[0].quantity : 0}
+                  {cartProduct.length > 0 ? cartProduct[0].quantity : 0}
                 </h1>
                 <button
                   onClick={() => cartAddition(product)}
