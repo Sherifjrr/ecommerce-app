@@ -1,25 +1,35 @@
-import { Link } from 'react-router-dom'
+import { CgProfile, CgShoppingCart } from 'react-icons/cg'
+import {
+  closeMenu,
+  closeModal,
+  openMenu,
+  openModal,
+} from '../../state/modalSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartReducer } from '../../state/cartSlice'
-import { openModal, closeModal } from '../../state/modalSlice'
-import { productPropsTypes } from '../../state/Types'
-import NavLink from './NavLink'
-import { useState } from 'react'
+
+import { Link } from 'react-router-dom'
+import LoginModal from '../elements/LoginModal'
 import NavHead from './NavHead'
-import { CgShoppingCart, CgProfile } from 'react-icons/cg'
+import NavLink from './NavLink'
 import { RootState } from '../../state/store'
 import SearchBar from '../elements/SearchBar'
-import LoginModal from '../elements/LoginModal'
+import { cartReducer } from '../../state/cartSlice'
+import { productPropsTypes } from '../../state/Types'
 
 function NavBar() {
-  const [toggleNav, setToggleNav] = useState<boolean>(false)
   const cartItems = useSelector((state: cartReducer) => state.cartReducer.cart)
   const modalState = useSelector(
     (state: RootState) => state.modalReducer.isOpen
   )
+  const menuState = useSelector(
+    (state: RootState) => state.modalReducer.isMenuOpen
+  )
   const dispatch = useDispatch()
   const handleModal = () => {
     modalState ? dispatch(closeModal()) : dispatch(openModal())
+  }
+  const handleMenu = () => {
+    menuState ? dispatch(closeMenu()) : dispatch(openMenu())
   }
 
   const countedTotal = cartItems.reduce(
@@ -33,15 +43,12 @@ function NavBar() {
       className="flex w-full flex-row items-center justify-between border-b-2 border-gray-200 p-4 lg:justify-around"
     >
       <LoginModal />
-      <div
-        className="space-y-2 lg:hidden"
-        onClick={() => setToggleNav(!toggleNav)}
-      >
+      <div className="space-y-2 lg:hidden" onClick={() => handleMenu()}>
         <span className="block h-0.5 w-8 animate-pulse bg-black"></span>
         <span className="block h-0.5 w-8 animate-pulse bg-black"></span>
         <span className="block h-0.5 w-8 animate-pulse bg-black"></span>
       </div>
-      {toggleNav && <NavHead setToggleNav={setToggleNav} />}
+      {menuState && <NavHead />}
       <Link className="ml-4 mr-auto text-3xl font-extrabold lg:m-2" to={'/'}>
         SHOP.CO
       </Link>

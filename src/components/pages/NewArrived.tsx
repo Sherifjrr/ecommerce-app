@@ -21,7 +21,12 @@ function NewArrived() {
 
   const allProducts = data
 
-  if (error) return <div>Error loading products</div>
+  if (error)
+    return (
+      <div className="text-center font-bold text-red-600">
+        Error loading products
+      </div>
+    )
   return (
     <section className="flex flex-col items-center justify-center">
       <h1 className="mb-5 mt-16 text-center text-4xl font-extrabold">
