@@ -1,20 +1,18 @@
-<<<<<<< HEAD
 import { closeMenu, openMenu } from '../../state/modalSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { MdOutlineCancel } from 'react-icons/md'
 import NavLink from './NavLink'
 import { RootState } from '../../state/store'
-=======
-import { MdOutlineCancel } from 'react-icons/md'
-import NavLink from './NavLink'
 
-interface NavHeadProps {
-  setToggleNav: React.Dispatch<React.SetStateAction<boolean>>
-}
->>>>>>> 0e700c8ba1712764d71409b6432f2a4b760f1ed1
-
-function NavHead({ setToggleNav }: NavHeadProps) {
+function NavHead() {
+  const dispatch = useDispatch()
+  const menuState = useSelector(
+    (state: RootState) => state.modalReducer.isMenuOpen
+  )
+  const handleMenu = () => {
+    menuState ? dispatch(closeMenu()) : dispatch(openMenu())
+  }
   return (
     <div className="fixed right-0 top-0 z-50 flex h-screen w-full flex-col bg-white p-10">
       <button type="button" className="text-4xl" onClick={() => handleMenu()}>
